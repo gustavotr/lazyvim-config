@@ -30,3 +30,9 @@ keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Deb
 keymap("n", "<F-10>", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Debug Step Over" })
 keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", { desc = "Debug Step Into" })
 keymap("n", "<leader>du", "<cmd>lua require'dap'.step_out()<cr>", { desc = "Debug Step Into" })
+
+-- Telescope
+keymap("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { silent = true, desc = "Find word" })
+keymap("n", "<leader>fW", function()
+  require("telescope.builtin").live_grep({ cwd = require("telescope.utils").buffer_dir() })
+end, { silent = true, desc = "Find word on folder" })
