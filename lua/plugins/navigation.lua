@@ -36,6 +36,8 @@ return {
         window = {
           mappings = {
             ["O"] = "open_with_system",
+            ["l"] = "open",
+            ["h"] = "close_node",
           },
         },
       },
