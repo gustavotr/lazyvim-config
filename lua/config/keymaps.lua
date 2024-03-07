@@ -23,7 +23,7 @@ keymap(
   { desc = "Toggle Trouble document", silent = true, noremap = true }
 )
 keymap("n", "<leader>tT", "<cmd>TroubleToggle<CR>", { desc = "Toggle Trouble", silent = true, noremap = true })
-keymap("n", "<leader>o", "<cmd>SymbolsOutline<CR>", { desc = "Toggle Symbols Outline", silent = true, noremap = true })
+keymap("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline", silent = true, noremap = true })
 
 -- Debug
 keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Debug Step Over" })
