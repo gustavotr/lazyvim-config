@@ -36,3 +36,10 @@ keymap("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { silent = true, desc 
 keymap("n", "<leader>fW", function()
   require("telescope.builtin").live_grep({ cwd = require("telescope.utils").buffer_dir() })
 end, { silent = true, desc = "Find word on folder" })
+
+keymap(
+  "n",
+  "<Leader>D",
+  ":lua require('neogen').generate()<CR>",
+  { noremap = true, silent = true, desc = "Generate docs" }
+)
