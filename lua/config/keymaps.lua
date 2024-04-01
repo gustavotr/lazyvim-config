@@ -18,11 +18,11 @@ keymap({ "n", "x" }, "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "window up" })
 -- Toggle
 keymap(
   "n",
-  "<leader>tt",
+  "<leader>Tt",
   "<cmd>TroubleToggle document_diagnostics<CR>",
   { desc = "Toggle Trouble document", silent = true, noremap = true }
 )
-keymap("n", "<leader>tT", "<cmd>TroubleToggle<CR>", { desc = "Toggle Trouble", silent = true, noremap = true })
+keymap("n", "<leader>TT", "<cmd>TroubleToggle<CR>", { desc = "Toggle Trouble", silent = true, noremap = true })
 keymap("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline", silent = true, noremap = true })
 
 -- Debug

@@ -11,7 +11,7 @@ return {
     opts = {
       defaults = {
         ["<leader>gd"] = { name = "+diffview" },
-        ["<leader>t"] = { name = "+toggle" },
+        ["<leader>T"] = { name = "+toggle" },
       },
     },
   },
