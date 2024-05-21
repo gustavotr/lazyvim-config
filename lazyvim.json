@@ -1,6 +1,5 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.coding.codeium",
     "lazyvim.plugins.extras.dap.core",
     "lazyvim.plugins.extras.editor.outline",
     "lazyvim.plugins.extras.lang.docker",
@@ -15,7 +14,7 @@
     "lazyvim.plugins.extras.test.core"
   ],
   "news": {
-    "NEWS.md": "3314"
+    "NEWS.md": "4964"
   },
-  "version": 3
+  "version": 4
 }
