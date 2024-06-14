@@ -6,7 +6,7 @@ return {
         lua = { "stylua" },
         fish = { "fish_indent" },
         sh = { "shfmt" },
-        json = { "deno_fmt" },
+        -- json = { "prettier" },
       },
     },
   },

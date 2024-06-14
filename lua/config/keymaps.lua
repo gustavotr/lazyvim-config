@@ -29,7 +29,8 @@ keymap("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline", silent =
 keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Debug Step Over" })
 keymap("n", "<F-10>", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Debug Step Over" })
 keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", { desc = "Debug Step Into" })
-keymap("n", "<leader>du", "<cmd>lua require'dap'.step_out()<cr>", { desc = "Debug Step Into" })
+keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", { desc = "Debug Step Out" })
+keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", { silent = true, desc = "UI Toggle" })
 
 -- Telescope
 keymap("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { silent = true, desc = "Find word" })
