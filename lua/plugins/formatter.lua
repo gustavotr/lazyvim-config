@@ -7,6 +7,8 @@ return {
         fish = { "fish_indent" },
         sh = { "shfmt" },
         json = { "prettier" },
+        javascript = { "prettier", "eslint" },
+        typescript = { "prettier", "eslint" },
       },
     },
   },
