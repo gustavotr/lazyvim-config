@@ -9,9 +9,9 @@ return {
   {
     "which-key.nvim",
     opts = {
-      defaults = {
-        ["<leader>gd"] = { name = "+diffview" },
-        ["<leader>T"] = { name = "+toggle" },
+      spec = {
+        { "<leader>gd", group = "+diffview" },
+        { "<leader>T", group = "+toggle" },
       },
     },
   },
