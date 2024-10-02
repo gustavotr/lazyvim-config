@@ -9,12 +9,6 @@ keymap("x", "<leader>/", "gc", { desc = "Comment", remap = true })
 
 keymap({ "n", "x" }, "<leader>gl", "<cmd>Gitsigns blame_line<cr>", { desc = "blame" })
 
--- Navigation
-keymap({ "n", "x" }, "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { desc = "window left" })
-keymap({ "n", "x" }, "<C-l>", "<cmd>TmuxNavigateRight<CR>", { desc = "window right" })
-keymap({ "n", "x" }, "<C-j>", "<cmd>TmuxNavigateDown<CR>", { desc = "window down" })
-keymap({ "n", "x" }, "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "window up" })
-
 -- Toggle
 keymap(
   "n",
