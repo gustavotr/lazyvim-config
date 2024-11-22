@@ -19,6 +19,10 @@ keymap(
 keymap("n", "<leader>TT", "<cmd>TroubleToggle<CR>", { desc = "Toggle Trouble", silent = true, noremap = true })
 keymap("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline", silent = true, noremap = true })
 
+-- Navigation
+keymap("n", "<leader>>", "<cmd>foldopen<CR>", { desc = "Fold Open", silent = true, noremap = true })
+keymap("n", "<leader><", "<cmd>foldclose<CR>", { desc = "Fold Close", silent = true, noremap = true })
+
 -- Debug
 keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Debug Step Over" })
 keymap("n", "<F-10>", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Debug Step Over" })
