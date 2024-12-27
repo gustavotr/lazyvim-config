@@ -4,9 +4,6 @@
 --
 local keymap = vim.keymap.set
 
-keymap("n", "<leader>/", "gcc", { desc = "Comment", remap = true })
-keymap("x", "<leader>/", "gc", { desc = "Comment", remap = true })
-
 keymap({ "n", "x" }, "<leader>gl", "<cmd>Gitsigns blame_line<cr>", { desc = "blame" })
 
 -- Toggle
@@ -29,12 +26,6 @@ keymap("n", "<F-10>", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Debug S
 keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", { desc = "Debug Step Into" })
 keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", { desc = "Debug Step Out" })
 keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", { silent = true, desc = "UI Toggle" })
-
--- Telescope
-keymap("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { silent = true, desc = "Find word" })
-keymap("n", "<leader>fW", function()
-  require("telescope.builtin").live_grep({ cwd = require("telescope.utils").buffer_dir() })
-end, { silent = true, desc = "Find word on folder" })
 
 keymap(
   "n",
