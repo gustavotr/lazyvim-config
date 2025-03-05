@@ -4,6 +4,9 @@ return {
     config = function()
       local conf = {
         -- For customization, refer to Install > Configuration in the Documentation/Readme
+        chat_confirm_delete = false,
+        default_command_agent = "Llama3.2",
+        default_chat_agent = "Llama3.2",
         providers = {
           -- secrets can be strings or tables with command and arguments
           -- secret = { "cat", "path_to/openai_api_key" },
@@ -58,8 +61,21 @@ return {
             system_prompt = require("gp.defaults").code_system_prompt,
           },
         },
-        default_command_agent = "Llama3.2",
-        default_chat_agent = "Llama3.2",
+        hooks = {
+          -- example of making :%GpChatNew a dedicated command which
+          -- opens new chat with the entire current buffer as a context
+          BufferChatNew = function(gp, _)
+            -- call GpChatNew command in range mode on whole buffer
+            vim.api.nvim_command("%" .. gp.config.cmd_prefix .. "ChatNew")
+          end,
+          UnitTests = function(gp, params)
+            local template = "I have the following code from {{filename}}:\n\n"
+              .. "```{{filetype}}\n{{selection}}\n```\n\n"
+              .. "Please respond by writing table driven unit tests for the code above."
+            local agent = gp.get_command_agent()
+            gp.Prompt(params, gp.Target.vnew, agent, template)
+          end,
+        },
       }
       require("gp").setup(conf)
       require("which-key").add({
@@ -72,14 +88,14 @@ return {
           { "<C-g><C-t>", ":<C-u>''>GpChatNew tabnew<cr>", desc = "ChatNew tabnew" },
           { "<C-g><C-v>", ":<C-u>'<,'>GpChatNew vsplit<cr>", desc = "ChatNew vsplit" },
           { "<C-g><C-x>", ":<C-u>'<,'>GpChatNew split<cr>", desc = "ChatNew split" },
-          { "<C-g>a", ":<C-u>'<,'>GpAppend<cr>", desc = "Visual Append (after)" },
-          { "<C-g>b", ":<C-u>'<,'>GpPrepend<cr>", desc = "Visual Prepend (before)" },
+          { "<C-g>a", ":<C-u>'<,'>GpAppend<cr>", desc = "Visual Append" },
+          { "<C-g>b", ":<C-u>'<,'>GpBufferChatNew<cr>", desc = "BufferChatNew" },
           { "<C-g>c", ":<C-u>'<,'>GpChatNew<cr>", desc = "Visual Chat New" },
           { "<C-g>g", group = "generate into new .." },
           { "<C-g>ge", ":<C-u>'<,'>GpEnew<cr>", desc = "Visual GpEnew" },
           { "<C-g>gn", ":<C-u>'<,'>GpNew<cr>", desc = "Visual GpNew" },
           { "<C-g>gp", ":<C-u>'<,'>GpPopup<cr>", desc = "Visual Popup" },
-          { "<C-g>gt", ":<C-u>'<,'>GpTabnew<cr>", desc = "Visual GpTabnew" },
+          { "<C-g>gt", ":<C-u>'<,'>GpUnitTests<cr>", desc = "Unit Tests" },
           { "<C-g>gv", ":<C-u>'<,'>GpVnew<cr>", desc = "Visual GpVnew" },
           { "<C-g>i", ":<C-u>'<,'>GpImplement<cr>", desc = "Implement selection" },
           { "<C-g>n", "<cmd>GpNextAgent<cr>", desc = "Next Agent" },
@@ -109,14 +125,14 @@ return {
           { "<C-g><C-v>", "<cmd>GpChatNew vsplit<cr>", desc = "New Chat vsplit" },
           { "<C-g><C-x>", "<cmd>GpChatNew split<cr>", desc = "New Chat split" },
           { "<C-g>a", "<cmd>GpAppend<cr>", desc = "Append (after)" },
-          { "<C-g>b", "<cmd>GpPrepend<cr>", desc = "Prepend (before)" },
+          { "<C-g>b", "<cmd>GpBufferChatNew<cr>", desc = "BufferChatNew" },
           { "<C-g>c", "<cmd>GpChatNew<cr>", desc = "New Chat" },
           { "<C-g>f", "<cmd>GpChatFinder<cr>", desc = "Chat Finder" },
           { "<C-g>g", group = "generate into new .." },
           { "<C-g>ge", "<cmd>GpEnew<cr>", desc = "GpEnew" },
           { "<C-g>gn", "<cmd>GpNew<cr>", desc = "GpNew" },
           { "<C-g>gp", "<cmd>GpPopup<cr>", desc = "Popup" },
-          { "<C-g>gt", "<cmd>GpTabnew<cr>", desc = "GpTabnew" },
+          { "<C-g>gt", "<cmd>GpUnitTests<cr>", desc = "Unit Tests" },
           { "<C-g>gv", "<cmd>GpVnew<cr>", desc = "GpVnew" },
           { "<C-g>n", "<cmd>GpNextAgent<cr>", desc = "Next Agent" },
           { "<C-g>r", "<cmd>GpRewrite<cr>", desc = "Inline Rewrite" },
@@ -144,14 +160,14 @@ return {
           { "<C-g><C-v>", "<cmd>GpChatNew vsplit<cr>", desc = "New Chat vsplit" },
           { "<C-g><C-x>", "<cmd>GpChatNew split<cr>", desc = "New Chat split" },
           { "<C-g>a", "<cmd>GpAppend<cr>", desc = "Append (after)" },
-          { "<C-g>b", "<cmd>GpPrepend<cr>", desc = "Prepend (before)" },
+          { "<C-g>b", "<cmd>GpBufferChatNew<cr>", desc = "BufferChatNew" },
           { "<C-g>c", "<cmd>GpChatNew<cr>", desc = "New Chat" },
           { "<C-g>f", "<cmd>GpChatFinder<cr>", desc = "Chat Finder" },
           { "<C-g>g", group = "generate into new .." },
           { "<C-g>ge", "<cmd>GpEnew<cr>", desc = "GpEnew" },
           { "<C-g>gn", "<cmd>GpNew<cr>", desc = "GpNew" },
           { "<C-g>gp", "<cmd>GpPopup<cr>", desc = "Popup" },
-          { "<C-g>gt", "<cmd>GpTabnew<cr>", desc = "GpTabnew" },
+          { "<C-g>gt", "<cmd>GpUnitTests<cr>", desc = "Unit Tests" },
           { "<C-g>gv", "<cmd>GpVnew<cr>", desc = "GpVnew" },
           { "<C-g>n", "<cmd>GpNextAgent<cr>", desc = "Next Agent" },
           { "<C-g>r", "<cmd>GpRewrite<cr>", desc = "Inline Rewrite" },
