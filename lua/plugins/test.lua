@@ -17,6 +17,21 @@ return {
         "<cmd>lua require('neotest').run.run({ jestCommand = 'jest --watch ' })<cr>",
         desc = "Run Watch",
       },
+      {
+        "<leader>tct",
+        "<cmd>CoverageToggle<cr>",
+        desc = "Coverage Toggle",
+      },
+      {
+        "<leader>tcl",
+        "<cmd>CoverageLoad<cr><cmd>CoverageShow<cr>",
+        desc = "Load Coverage",
+      },
+      {
+        "<leader>tcs",
+        "<cmd>CoverageSummary<cr>",
+        desc = "Coverage Summary",
+      },
     },
     opts = function(_, opts)
       table.insert(
@@ -30,6 +45,15 @@ return {
           end,
         })
       )
+    end,
+  },
+  {
+    "andythigpen/nvim-coverage",
+    version = "*",
+    config = function()
+      require("coverage").setup({
+        auto_reload = true,
+      })
     end,
   },
 }

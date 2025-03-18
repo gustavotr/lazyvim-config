@@ -12,6 +12,7 @@ return {
       spec = {
         { "<leader>gd", group = "+diffview" },
         { "<leader>T", group = "+toggle" },
+        { "<leader>tc", group = "+coverage" },
       },
     },
   },
