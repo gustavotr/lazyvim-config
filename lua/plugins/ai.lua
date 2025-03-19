@@ -5,7 +5,7 @@ return {
       local conf = {
         -- For customization, refer to Install > Configuration in the Documentation/Readme
         chat_confirm_delete = false,
-        default_command_agent = "Llama3.2",
+        default_command_agent = "Qwen2.5-Coder:7b",
         default_chat_agent = "Llama3.2",
         providers = {
           -- secrets can be strings or tables with command and arguments
@@ -47,12 +47,57 @@ return {
           },
           {
             provider = "ollama",
-            name = "Deepseek-r1",
+            name = "Deepseek-r1:8b",
+            chat = true,
+            command = true,
+            -- string with model name or table with model name and parameters
+            model = {
+              model = "deepseek-r1:8b",
+              temperature = 0.4,
+              top_p = 1,
+              min_p = 0.05,
+            },
+            -- system prompt (use this to specify the persona/role of the AI)
+            system_prompt = require("gp.defaults").code_system_prompt,
+          },
+          {
+            provider = "ollama",
+            name = "Deepseek-r1:1.5b",
             chat = true,
             command = true,
             -- string with model name or table with model name and parameters
             model = {
               model = "deepseek-r1:1.5b",
+              temperature = 0.4,
+              top_p = 1,
+              min_p = 0.05,
+            },
+            -- system prompt (use this to specify the persona/role of the AI)
+            system_prompt = require("gp.defaults").code_system_prompt,
+          },
+          {
+            provider = "ollama",
+            name = "Qwen2.5-Coder:7b",
+            chat = true,
+            command = true,
+            -- string with model name or table with model name and parameters
+            model = {
+              model = "qwen2.5-coder:7b",
+              temperature = 0.4,
+              top_p = 1,
+              min_p = 0.05,
+            },
+            -- system prompt (use this to specify the persona/role of the AI)
+            system_prompt = require("gp.defaults").code_system_prompt,
+          },
+          {
+            provider = "ollama",
+            name = "Qwen2.5-Coder:3b",
+            chat = true,
+            command = true,
+            -- string with model name or table with model name and parameters
+            model = {
+              model = "qwen2.5-coder:3b",
               temperature = 0.4,
               top_p = 1,
               min_p = 0.05,
