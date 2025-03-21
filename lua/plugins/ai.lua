@@ -10,6 +10,14 @@ return {
       strategies = {
         chat = {
           adapter = "llama3",
+          keymaps = {
+            close = {
+              modes = {
+                n = "<C-w>",
+                i = "<C-w>",
+              },
+            },
+          },
         },
         inline = {
           adapter = "llama3",
@@ -21,14 +29,6 @@ return {
             name = "llama3.2", -- Give this adapter a different name to differentiate it from the default ollama adapter
           })
         end,
-      },
-      keymaps = {
-        close = {
-          modes = {
-            n = "<C-w>",
-            i = "<C-w>",
-          },
-        },
       },
     },
   },
