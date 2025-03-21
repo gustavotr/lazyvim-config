@@ -15,7 +15,7 @@ return {
         { "<leader>tc", group = "+coverage" },
         { "<leader>a", group = "+ai", icon = { icon = "🤖" }, mode = { "v", "n" } },
         { "<leader>aa", "<cmd>CodeCompanionActions<cr>", desc = "Actions", mode = { "n", "v" } },
-        { "<leader>ac", ":<C-u>'<,'>CodeCompanion /commit<cr>", desc = "Commit", mode = "v" },
+        { "<leader>ag", ":<C-u>'<,'>CodeCompanion /commit<cr>", desc = "Commit", mode = "v" },
         { "<leader>ac", ":<C-u>'<,'>CodeCompanionChat<cr>", desc = "Chat", mode = "v" },
         { "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Chat" },
         { "<leader>ad", ":<C-u>'<,'>CodeCompanion /lsp<cr>", desc = "Explain Diagnostics", mode = "v" },
