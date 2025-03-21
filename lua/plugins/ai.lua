@@ -11,7 +11,7 @@ return {
       log_level = "DEBUG",
       strategies = {
         chat = {
-          adapter = "llama3",
+          adapter = "ollama",
           keymaps = {
             close = {
               modes = {
@@ -22,16 +22,21 @@ return {
           },
         },
         inline = {
-          adapter = "llama3",
+          adapter = "ollama",
         },
       },
       adapters = {
-        llama3 = function()
+        ollama = function()
           return require("codecompanion.adapters").extend("ollama", {
-            name = "llama3.2", -- Give this adapter a different name to differentiate it from the default ollama adapter
             schema = {
               model = {
                 default = "qwen2.5-coder:7b",
+              },
+              num_ctx = {
+                default = 16384,
+              },
+              num_predict = {
+                default = -1,
               },
             },
           })
