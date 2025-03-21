@@ -5,6 +5,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
+      "j-hui/fidget.nvim",
     },
     opts = {
       strategies = {
@@ -31,5 +32,8 @@ return {
         end,
       },
     },
+    init = function()
+      require("plugins.codecompanion.fidget-spinner"):init()
+    end,
   },
 }
