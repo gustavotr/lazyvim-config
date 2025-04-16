@@ -11,7 +11,7 @@ return {
       log_level = "DEBUG",
       strategies = {
         chat = {
-          adapter = "ollama",
+          adapter = "copilot",
           keymaps = {
             close = {
               modes = {
@@ -22,7 +22,10 @@ return {
           },
         },
         inline = {
-          adapter = "ollama",
+          adapter = "copilot",
+        },
+        cmd = {
+          adapter = "copilot",
         },
       },
       adapters = {
