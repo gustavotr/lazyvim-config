@@ -44,6 +44,20 @@ return {
             },
           })
         end,
+        openrouter = function()
+          return require("codecompanion.adapters").extend("openai_compatible", {
+            env = {
+              url = "https://openrouter.ai/api",
+              api_key = os.getenv("OPENROUTER_API_KEY"),
+              chat_url = "/v1/chat/completions",
+            },
+            schema = {
+              model = {
+                default = "qwen/qwen3-30b-a3b:free",
+              },
+            },
+          })
+        end,
       },
     },
     init = function()
