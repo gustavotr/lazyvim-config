@@ -1,51 +1,43 @@
 return {
   {
-    "mxsdev/nvim-dap-vscode-js",
-    dependencies = {
-      "mfussenegger/nvim-dap",
-      {
-        "microsoft/vscode-js-debug",
-        build = "npm ci --legacy-peer-deps && npx gulp vsDebugServerBundle && rm -rf out &&  mv dist out",
-      },
-    },
-  },
-  {
     "mfussenegger/nvim-dap",
-    config = function()
-      local DEBUGGER_PATH = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"
-      require("dap-vscode-js").setup({
-        node_path = "node",
-        debugger_path = DEBUGGER_PATH,
-        -- debugger_cmd = { "js-debug-adapter" },
-        adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" }, -- which adapters to register in nvim-dap
-      })
-
-      local dap_breakpoint = {
-        error = {
-          text = "🟥",
-          texthl = "LspDiagnosticsSignError",
-          linehl = "",
-          numhl = "",
-        },
-        rejected = {
-          text = "",
-          texthl = "LspDiagnosticsSignHint",
-          linehl = "",
-          numhl = "",
-        },
-        stopped = {
-          text = "⭐️",
-          texthl = "LspDiagnosticsSignInformation",
-          linehl = "DiagnosticUnderlineInfo",
-          numhl = "LspDiagnosticsSignInformation",
-        },
-      }
-
-      vim.fn.sign_define("DapBreakpoint", dap_breakpoint.error)
-      vim.fn.sign_define("DapStopped", dap_breakpoint.stopped)
-      vim.fn.sign_define("DapBreakpointRejected", dap_breakpoint.rejected)
-    end,
     opts = function()
+      local dap = require("dap")
+      if not dap.adapters["pwa-node"] then
+        require("dap").adapters["pwa-node"] = {
+          type = "server",
+          host = "localhost",
+          port = "${port}",
+          executable = {
+            command = "node",
+            -- 💀 Make sure to update this path to point to your installation
+            args = {
+              LazyVim.get_pkg_path("js-debug-adapter", "/js-debug/src/dapDebugServer.js"),
+              "${port}",
+            },
+          },
+        }
+      end
+      if not dap.adapters["node"] then
+        dap.adapters["node"] = function(cb, config)
+          if config.type == "node" then
+            config.type = "pwa-node"
+          end
+          local nativeAdapter = dap.adapters["pwa-node"]
+          if type(nativeAdapter) == "function" then
+            nativeAdapter(cb, config)
+          else
+            cb(nativeAdapter)
+          end
+        end
+      end
+
+      local js_filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
+
+      local vscode = require("dap.ext.vscode")
+      vscode.type_to_filetypes["node"] = js_filetypes
+      vscode.type_to_filetypes["pwa-node"] = js_filetypes
+
       for _, language in ipairs({ "typescript", "javascript" }) do
         require("dap").configurations[language] = {
           {
@@ -54,7 +46,7 @@ return {
             name = "Launch file",
             program = "${file}",
             cwd = "${workspaceFolder}",
-            skipFiles = { "<node_internals>/**", "**/node_modules/**" },
+            -- skipFiles = { "<node_internals>/**", "**/node_modules/**" },
           },
           {
             name = "Attach",
@@ -71,7 +63,7 @@ return {
             name = "Attach to process",
             processId = require("dap.utils").pick_process,
             cwd = "${workspaceFolder}",
-            skipFiles = { "<node_internals>/**", "**/node_modules/**" },
+            -- skipFiles = { "<node_internals>/**", "**/node_modules/**" },
           },
           {
             type = "pwa-node",
@@ -87,7 +79,7 @@ return {
             cwd = "${workspaceFolder}",
             console = "integratedTerminal",
             internalConsoleOptions = "neverOpen",
-            skipFiles = { "<node_internals>/**", "**/node_modules/**" },
+            -- skipFiles = { "<node_internals>/**", "**/node_modules/**" },
           },
           {
             type = "pwa-node",
@@ -109,7 +101,7 @@ return {
             },
             rootPath = "${workspaceFolder}$",
             cwd = "${workspaceFolder}",
-            skipFiles = { "<node_internals>/**", "**/node_modules/**" },
+            -- skipFiles = { "<node_internals>/**", "**/node_modules/**" },
           },
         }
       end
@@ -123,7 +115,7 @@ return {
             cwd = vim.fn.getcwd(),
             sourceMaps = true,
             protocol = "inspector",
-            skipFiles = { "**/node_modules/**" },
+            -- skipFiles = { "**/node_modules/**" },
           },
           {
             type = "pwa-chrome",
@@ -135,14 +127,14 @@ return {
             protocol = "inspector",
             port = 9222,
             webRoot = "${workspaceFolder}",
-            skipFiles = { "**/node_modules/**" },
+            -- skipFiles = { "**/node_modules/**" },
           },
           {
             type = "pwa-chrome",
             name = "Launch Chrome",
             request = "launch",
             url = "http://localhost:3000",
-            skipFiles = { "**/node_modules/**" },
+            -- skipFiles = { "**/node_modules/**" },
           },
         }
       end
