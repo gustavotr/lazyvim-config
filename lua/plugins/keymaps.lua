@@ -15,6 +15,7 @@ return {
         { "<leader>tc", group = "+coverage" },
         { "<leader>a", group = "+ai", icon = { icon = "🤖" }, mode = { "v", "n" } },
         { "<leader>ac", group = "+CodeCompanion", icon = { icon = "🤖" }, mode = { "v", "n" } },
+        { "<leader>am", "<cmd>MCPHub<cr>", desc = "MCPHub", mode = { "n", "v" } },
         { "<leader>aca", "<cmd>CodeCompanionActions<cr>", desc = "Actions", mode = { "n", "v" } },
         { "<leader>acg", ":<C-u>'<,'>CodeCompanion /commit<cr>", desc = "Commit", mode = "v" },
         { "<leader>acc", ":<C-u>'<,'>CodeCompanionChat<cr>", desc = "Chat", mode = "v" },
