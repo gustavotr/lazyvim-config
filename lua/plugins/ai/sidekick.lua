@@ -8,6 +8,11 @@ return {
           backend = "tmux",
           enabled = true,
         },
+        win = {
+          keys = {
+            files = { "<c-s>", "files", mode = "nt", desc = "open file picker" },
+          },
+        },
       },
     },
     keys = {
