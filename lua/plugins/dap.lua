@@ -41,14 +41,6 @@ return {
       for _, language in ipairs({ "typescript", "javascript" }) do
         require("dap").configurations[language] = {
           {
-            type = "pwa-node",
-            request = "launch",
-            name = "Launch file",
-            program = "${file}",
-            cwd = "${workspaceFolder}",
-            -- skipFiles = { "<node_internals>/**", "**/node_modules/**" },
-          },
-          {
             name = "Attach",
             type = "pwa-node",
             request = "attach",
@@ -56,6 +48,14 @@ return {
             sourceMaps = true,
             protocol = "inspector",
             skipFiles = { "<node_internals>/**", "**/node_modules/**" },
+          },
+          {
+            type = "pwa-node",
+            request = "launch",
+            name = "Launch file",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
+            -- skipFiles = { "<node_internals>/**", "**/node_modules/**" },
           },
           {
             type = "pwa-node",
