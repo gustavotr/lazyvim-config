@@ -96,6 +96,13 @@ return {
         end,
         desc = "Sidekick Toggle Gemini",
       },
+      {
+        "<leader>ao",
+        function()
+          require("sidekick.cli").toggle({ name = "opencode", focus = true })
+        end,
+        desc = "Sidekick Toggle Opencode",
+      },
     },
   },
 }
