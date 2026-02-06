@@ -11,6 +11,7 @@ return {
         win = {
           keys = {
             files = { "<c-s>", "files", mode = "nt", desc = "open file picker" },
+            prompt = { "<c-p>", "prompt", mode = "i", desc = "insert prompt or context" },
           },
         },
       },
