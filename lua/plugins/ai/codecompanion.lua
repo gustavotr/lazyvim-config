@@ -9,7 +9,7 @@ return {
     },
     opts = {
       log_level = "ERROR",
-      strategies = {
+      interactions = {
         chat = {
           adapter = "copilot",
           keymaps = {
@@ -26,6 +26,17 @@ return {
         },
         cmd = {
           adapter = "copilot",
+        },
+        cli = {
+          agent = "copilot",
+          agents = {
+            copilot = {
+              cmd = "copilot",
+              args = {},
+              description = "Copilot CLI",
+              provider = "terminal",
+            },
+          },
         },
       },
       adapters = {

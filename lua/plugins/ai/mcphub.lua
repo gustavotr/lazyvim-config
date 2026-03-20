@@ -1,6 +1,6 @@
 return {
   {
-    "ravitemer/mcphub.nvim",
+    "bahaaza/mcphub.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
